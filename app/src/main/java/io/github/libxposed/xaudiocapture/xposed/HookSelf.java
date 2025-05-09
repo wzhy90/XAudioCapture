@@ -14,7 +14,7 @@ import io.github.libxposed.xaudiocapture.MainApplication;
 @Keep
 public class HookSelf implements IXposedHookLoadPackage {
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if (!APPLICATION_ID.equals(lpparam.packageName))
             return;
 
