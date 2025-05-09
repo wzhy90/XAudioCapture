@@ -25,7 +25,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    namespace 'tw.idv.palatis.xappdebug.hiddenapi'
+    namespace 'io.github.libxposed.xaudiocapture.hiddenapi'
 }
 
 dependencies {

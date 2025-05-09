@@ -1,2 +1,2 @@
-tw.idv.palatis.xappdebug.xposed.HookMain
-tw.idv.palatis.xappdebug.xposed.HookSelf
+io.github.libxposed.xaudiocapture.xposed.HookMain
+io.github.libxposed.xaudiocapture.xposed.HookSelf

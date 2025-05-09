@@ -5,14 +5,14 @@ android {
     signingConfigs {
         release {
             // for custom release signing keys
-            // 1. create `tw.idv.palatis.XAppDebug.signing.properties` under `~/.gradle`
+            // 1. create `io.github.libxposed.xaudiocapture.signing.properties` under `~/.gradle`
             // 2. populate with these values:
             //   - STORE_FILE=/path/to/keystore.jks
             //   - STORE_PASSWORD=super_secret_password
             //   - KEY_ALIAS=your key alias
             //   - KEY_PASSWORD=super_secret_password
 
-            def propsPath = System.getProperty("user.home") + "/.gradle/tw.idv.palatis.XAppDebug.signing.properties"
+            def propsPath = System.getProperty("user.home") + "/.gradle/io.github.libxposed.xaudiocapture.signing.properties"
             def propsFile = file(propsPath)
             if (propsFile.canRead()) {
                 def props = new Properties()
@@ -40,7 +40,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "tw.idv.palatis.xappdebug"
+        applicationId "io.github.libxposed.xaudiocapture"
         minSdkVersion 24
         targetSdkVersion 33
         versionCode 100006
@@ -70,7 +70,7 @@ android {
         targetCompatibility = 1.8
     }
 
-    namespace 'tw.idv.palatis.xappdebug'
+    namespace 'io.github.libxposed.xaudiocapture'
 }
 
 android.applicationVariants.all { variant ->
