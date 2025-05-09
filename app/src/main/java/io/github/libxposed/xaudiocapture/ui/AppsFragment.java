@@ -1,7 +1,6 @@
 package io.github.libxposed.xaudiocapture.ui;
 
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_DEBUG;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_DEBUGGABLE_FIRST;
+import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
 import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
 import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
 import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
@@ -9,6 +8,7 @@ import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_LABEL;
 import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_PACKAGE_NAME;
 import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_UPDATE_TIME;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,6 +58,7 @@ public class AppsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.apps, menu);
         final SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        assert search != null;
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -89,14 +90,13 @@ public class AppsFragment extends Fragment {
                 menu.findItem(R.id.action_sort_update_time).setChecked(true);
                 break;
         }
-        menu.findItem(R.id.action_debuggable_first)
-                .setChecked(mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUGGABLE_FIRST, false));
+        menu.findItem(R.id.action_selected_first)
+                .setChecked(mSharedPreferences.getBoolean(PREF_KEY_SHOW_SELECTED_FIRST, true));
         menu.findItem(R.id.action_show_system)
                 .setChecked(mSharedPreferences.getBoolean(PREF_KEY_SHOW_SYSTEM, false));
-        menu.findItem(R.id.action_show_debug)
-                .setChecked(mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUG, false));
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -119,21 +119,15 @@ public class AppsFragment extends Fragment {
                 mSharedPreferences.edit().putInt(PREF_KEY_SORT_ORDER, SORT_ORDER_UPDATE_TIME).apply();
                 requireActivity().invalidateOptionsMenu();
                 return true;
-            case R.id.action_debuggable_first:
+            case R.id.action_selected_first:
                 mSharedPreferences.edit()
-                        .putBoolean(PREF_KEY_SHOW_DEBUGGABLE_FIRST, !mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUGGABLE_FIRST, false))
+                        .putBoolean(PREF_KEY_SHOW_SELECTED_FIRST, !mSharedPreferences.getBoolean(PREF_KEY_SHOW_SELECTED_FIRST, true))
                         .apply();
                 requireActivity().invalidateOptionsMenu();
                 return true;
             case R.id.action_show_system:
                 mSharedPreferences.edit()
                         .putBoolean(PREF_KEY_SHOW_SYSTEM, !mSharedPreferences.getBoolean(PREF_KEY_SHOW_SYSTEM, false))
-                        .apply();
-                requireActivity().invalidateOptionsMenu();
-                return true;
-            case R.id.action_show_debug:
-                mSharedPreferences.edit()
-                        .putBoolean(PREF_KEY_SHOW_DEBUG, !mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUG, false))
                         .apply();
                 requireActivity().invalidateOptionsMenu();
                 return true;

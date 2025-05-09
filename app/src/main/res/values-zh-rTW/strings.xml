@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">讓我抓蟲（除錯版）</string>
-    <string name="app_xposed_description">讓你想抵霸誰就抵霸誰！</string>
+    <string name="app_name">偷錄</string>
+    <string name="app_xposed_description">讓不允許錄音的程式可以錄音</string>
 
     <string name="title_activity_main">@string/app_name</string>
-    <string name="navigation_drawer_open">打開側邊欄</string>
-    <string name="navigation_drawer_close">關閉側邊欄</string>
     <string name="nav_header_title">@string/app_name</string>
     <string name="nav_header_subtitle">@string/app_xposed_description</string>
     <string name="nav_header_desc">側邊欄標題</string>
@@ -22,12 +20,11 @@
     <string name="action_sort_install_time">安裝時間</string>
     <string name="action_sort_update_time">最後更新時間</string>
     <string name="action_title_options">選項</string>
-    <string name="action_debuggable_first">可除錯優先</string>
+    <string name="action_debuggable_first">已選中優先</string>
     <string name="action_show_system">顯示系統應用</string>
-    <string name="action_show_debug">顯示本就可除錯應用</string>
 
     <string name="restart_required">重啟該應用程式套用變更！</string>
-    <string name="dismiss">朕知道了！</string>
+    <string name="dismiss">我知道了！</string>
 
     <string name="app_version">版本：%s</string>
     <string name="xposed_version">Xposed 版本：%d</string>

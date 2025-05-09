@@ -1,10 +1,8 @@
 package io.github.libxposed.xaudiocapture.adapters;
 
-import static android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_DEBUG;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_DEBUGGABLE_FIRST;
+import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
 import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
 import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
 import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
@@ -46,9 +44,8 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case PREF_KEY_SORT_ORDER:
-            case PREF_KEY_SHOW_DEBUGGABLE_FIRST:
+            case PREF_KEY_SHOW_SELECTED_FIRST:
             case PREF_KEY_SHOW_SYSTEM:
-            case PREF_KEY_SHOW_DEBUG:
                 filterAndSort();
                 notifyDataSetChanged();
                 break;
@@ -85,15 +82,11 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
             return (pkg.applicationInfo.flags & flag) == flag;
         }
 
-        public boolean isDebugApp() {
-            return hasFlag(FLAG_DEBUGGABLE);
-        }
-
         public boolean isSystemApp() {
             return hasFlag(FLAG_SYSTEM);
         }
 
-        public boolean isDebuggable() {
+        public boolean isSelected() {
             return Configuration.isEnabled(getPackageName());
         }
 
@@ -186,25 +179,14 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
         return filtered;
     }
 
-    private List<PackageInfoCache> filterDebuggable(List<PackageInfoCache> target) {
-        if (mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUG, false))
-            return target;
-
-        final List<PackageInfoCache> filtered = new ArrayList<>(target.size());
-        for (final PackageInfoCache pkg : target)
-            if (!pkg.isDebugApp())
-                filtered.add(pkg);
-        return filtered;
-    }
-
     private List<PackageInfoCache> filterQuery(List<PackageInfoCache> target) {
         if (TextUtils.isEmpty(mFilterQuery))
             return target;
 
         final List<PackageInfoCache> filtered = new ArrayList<>(target.size());
         for (final PackageInfoCache pkg : target)
-            if (pkg.getLabel(mPackageManager).toString().toLowerCase().contains(mFilterQuery) ||
-                    pkg.getPackageName().toLowerCase().contains(mFilterQuery))
+            if (pkg.getLabel(mPackageManager).toString().toLowerCase().contains(mFilterQuery.toLowerCase()) ||
+                    pkg.getPackageName().toLowerCase().contains(mFilterQuery.toLowerCase()))
                 filtered.add(pkg);
         return filtered;
     }
@@ -212,7 +194,6 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
     private void filterAndSort() {
         List<PackageInfoCache> filtered;
         filtered = filterSystem(mInstalledPackages);
-        filtered = filterDebuggable(filtered);
         filtered = filterQuery(filtered);
 
         Comparator<PackageInfoCache> orderComparator = null;
@@ -231,11 +212,11 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
                 break;
         }
 
-        if (mSharedPreferences.getBoolean(PREF_KEY_SHOW_DEBUGGABLE_FIRST, false)) {
+        if (mSharedPreferences.getBoolean(PREF_KEY_SHOW_SELECTED_FIRST, true)) {
             final Comparator<PackageInfoCache> debuggableComparator = (pkg1, pkg2) -> {
-                if (pkg1.isDebuggable() && !pkg2.isDebuggable())
+                if (pkg1.isSelected() && !pkg2.isSelected())
                     return 1;
-                if (!pkg1.isDebuggable() && pkg2.isDebuggable())
+                if (!pkg1.isSelected() && pkg2.isSelected())
                     return -1;
                 return 0;
             };
@@ -273,7 +254,7 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
 
             icon.setImageDrawable(pkg.getIcon(pm));
             applicationLabel.setText(pkg.getLabel(pm));
-            applicationLabel.setTypeface(null, getTypeFace(pkg.isSystemApp(), pkg.isDebugApp()));
+            applicationLabel.setTypeface(null, getTypeFace(pkg.isSystemApp()));
             packageName.setText(pkg.getPackageName());
             toggle.setOnCheckedChangeListener(null);
             toggle.setChecked(Configuration.isEnabled(pkg.getPackageName()));
@@ -296,13 +277,9 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
             toggle.toggle();
         }
 
-        private static int getTypeFace(boolean system, boolean debug) {
-            if (system && debug)
-                return Typeface.BOLD_ITALIC;
+        private static int getTypeFace(boolean system) {
             if (system)
                 return Typeface.BOLD;
-            if (debug)
-                return Typeface.ITALIC;
             return Typeface.NORMAL;
         }
     }

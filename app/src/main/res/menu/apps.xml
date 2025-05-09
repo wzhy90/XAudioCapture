@@ -46,14 +46,11 @@
 
             <group android:checkableBehavior="all">
                 <item
-                    android:id="@+id/action_debuggable_first"
+                    android:id="@+id/action_selected_first"
                     android:title="@string/action_debuggable_first" />
                 <item
                     android:id="@+id/action_show_system"
                     android:title="@string/action_show_system" />
-                <item
-                    android:id="@+id/action_show_debug"
-                    android:title="@string/action_show_debug" />
             </group>
 
         </menu>
