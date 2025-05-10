@@ -1,9 +1,9 @@
-package io.github.libxposed.xaudiocapture.xposed;
+package io.github.wzhy.xaudiocapture.xposed;
 
 import static android.util.Log.getStackTraceString;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static io.github.libxposed.xaudiocapture.Constants.LOG_TAG;
+import static io.github.wzhy.xaudiocapture.Constants.LOG_TAG;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
@@ -19,7 +19,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import io.github.libxposed.xaudiocapture.Configuration;
+import io.github.wzhy.xaudiocapture.Configuration;
 
 @Keep
 public class HookMain implements IXposedHookLoadPackage {

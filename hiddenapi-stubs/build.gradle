@@ -25,7 +25,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
-    namespace 'io.github.libxposed.xaudiocapture.hiddenapi'
+    namespace 'io.github.wzhy.xaudiocapture.hiddenapi'
 }
 
 dependencies {

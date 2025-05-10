@@ -1,12 +1,12 @@
-package io.github.libxposed.xaudiocapture.ui;
+package io.github.wzhy.xaudiocapture.ui;
 
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_LABEL;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_PACKAGE_NAME;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_UPDATE_TIME;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_LABEL;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_PACKAGE_NAME;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_UPDATE_TIME;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -25,9 +25,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.github.libxposed.xaudiocapture.R;
-import io.github.libxposed.xaudiocapture.adapters.InstalledPackageAdapter;
-import io.github.libxposed.xaudiocapture.viewmodels.AppsViewModel;
+import io.github.wzhy.xaudiocapture.R;
+import io.github.wzhy.xaudiocapture.adapters.InstalledPackageAdapter;
+import io.github.wzhy.xaudiocapture.viewmodels.AppsViewModel;
 
 public class AppsFragment extends Fragment {
 

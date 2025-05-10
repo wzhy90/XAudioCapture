@@ -1,4 +1,4 @@
-package io.github.libxposed.xaudiocapture.hiddenapi;
+package io.github.wzhy.xaudiocapture.hiddenapi;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("io.github.libxposed.xaudiocapture.hiddenapi.test", appContext.getPackageName());
+        assertEquals("io.github.wzhy.xaudiocapture.hiddenapi.test", appContext.getPackageName());
     }
 }

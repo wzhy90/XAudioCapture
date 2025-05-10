@@ -1,6 +1,6 @@
-package io.github.libxposed.xaudiocapture;
+package io.github.wzhy.xaudiocapture;
 
-import static io.github.libxposed.xaudiocapture.Constants.LOG_TAG;
+import static io.github.wzhy.xaudiocapture.Constants.LOG_TAG;
 
 import android.app.Application;
 import android.util.Log;

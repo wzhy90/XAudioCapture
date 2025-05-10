@@ -1,4 +1,4 @@
-package io.github.libxposed.xaudiocapture.viewmodels;
+package io.github.wzhy.xaudiocapture.viewmodels;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

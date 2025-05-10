@@ -1,2 +1,2 @@
-io.github.libxposed.xaudiocapture.xposed.HookMain
-io.github.libxposed.xaudiocapture.xposed.HookSelf
+io.github.wzhy.xaudiocapture.xposed.HookMain
+io.github.wzhy.xaudiocapture.xposed.HookSelf

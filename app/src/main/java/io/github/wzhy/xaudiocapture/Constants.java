@@ -1,8 +1,8 @@
-package io.github.libxposed.xaudiocapture;
+package io.github.wzhy.xaudiocapture;
 
 import android.annotation.SuppressLint;
 
-import static io.github.libxposed.xaudiocapture.BuildConfig.APPLICATION_ID;
+import static io.github.wzhy.xaudiocapture.BuildConfig.APPLICATION_ID;
 
 public class Constants {
     public static final String LOG_TAG = "XAudioCapture";

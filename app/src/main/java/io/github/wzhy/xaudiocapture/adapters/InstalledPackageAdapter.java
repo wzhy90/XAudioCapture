@@ -1,14 +1,14 @@
-package io.github.libxposed.xaudiocapture.adapters;
+package io.github.wzhy.xaudiocapture.adapters;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
-import static io.github.libxposed.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_LABEL;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_PACKAGE_NAME;
-import static io.github.libxposed.xaudiocapture.Constants.SORT_ORDER_UPDATE_TIME;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SHOW_SYSTEM;
+import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SORT_ORDER;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_INSTALL_TIME;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_LABEL;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_PACKAGE_NAME;
+import static io.github.wzhy.xaudiocapture.Constants.SORT_ORDER_UPDATE_TIME;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import io.github.libxposed.xaudiocapture.Configuration;
-import io.github.libxposed.xaudiocapture.R;
+import io.github.wzhy.xaudiocapture.Configuration;
+import io.github.wzhy.xaudiocapture.R;
 
 public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPackageAdapter.ViewHolder>
         implements SharedPreferences.OnSharedPreferenceChangeListener {

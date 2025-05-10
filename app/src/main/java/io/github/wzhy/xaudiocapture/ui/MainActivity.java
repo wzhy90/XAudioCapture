@@ -1,4 +1,4 @@
-package io.github.libxposed.xaudiocapture.ui;
+package io.github.wzhy.xaudiocapture.ui;
 
 import android.os.Bundle;
 
@@ -13,7 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
-import io.github.libxposed.xaudiocapture.R;
+import io.github.wzhy.xaudiocapture.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package io.github.libxposed.xaudiocapture;
+package io.github.wzhy.xaudiocapture;
 
 import android.os.Process;
 import android.system.ErrnoException;
@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
-import static io.github.libxposed.xaudiocapture.Constants.CONFIG_PATH_FORMAT;
+import static io.github.wzhy.xaudiocapture.Constants.CONFIG_PATH_FORMAT;
 
 public final class Configuration {
     private Configuration() {

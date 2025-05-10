@@ -1,6 +1,6 @@
-package io.github.libxposed.xaudiocapture.ui;
+package io.github.wzhy.xaudiocapture.ui;
 
-import static io.github.libxposed.xaudiocapture.BuildConfig.VERSION_NAME;
+import static io.github.wzhy.xaudiocapture.BuildConfig.VERSION_NAME;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import io.github.libxposed.xaudiocapture.MainApplication;
-import io.github.libxposed.xaudiocapture.R;
+import io.github.wzhy.xaudiocapture.MainApplication;
+import io.github.wzhy.xaudiocapture.R;
 
 public class AboutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

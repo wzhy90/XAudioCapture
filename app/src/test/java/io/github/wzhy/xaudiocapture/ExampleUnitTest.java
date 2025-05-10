@@ -1,4 +1,4 @@
-package io.github.libxposed.xaudiocapture;
+package io.github.wzhy.xaudiocapture;
 
 import org.junit.Test;
 

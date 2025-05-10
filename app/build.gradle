@@ -5,14 +5,14 @@ android {
     signingConfigs {
         release {
             // for custom release signing keys
-            // 1. create `io.github.libxposed.xaudiocapture.signing.properties` under `~/.gradle`
+            // 1. create `io.github.wzhy.xaudiocapture.signing.properties` under `~/.gradle`
             // 2. populate with these values:
             //   - STORE_FILE=/path/to/keystore.jks
             //   - STORE_PASSWORD=super_secret_password
             //   - KEY_ALIAS=your key alias
             //   - KEY_PASSWORD=super_secret_password
 
-            def propsPath = System.getProperty("user.home") + "/.gradle/io.github.libxposed.xaudiocapture.signing.properties"
+            def propsPath = System.getProperty("user.home") + "/.gradle/io.github.wzhy.xaudiocapture.signing.properties"
             def propsFile = file(propsPath)
             if (propsFile.canRead()) {
                 def props = new Properties()
@@ -39,7 +39,7 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        applicationId "io.github.libxposed.xaudiocapture"
+        applicationId "io.github.wzhy.xaudiocapture"
         minSdkVersion 29
         targetSdkVersion 33
         versionCode 1000
@@ -69,7 +69,7 @@ android {
         targetCompatibility = 11
     }
 
-    namespace 'io.github.libxposed.xaudiocapture'
+    namespace 'io.github.wzhy.xaudiocapture'
     lint {
         abortOnError false
         checkReleaseBuilds false
