@@ -25,8 +25,8 @@ public final class Configuration {
             final File parent1 = new File(file.getParent());
             final File parent2 = new File(parent1.getParent());
             parent1.mkdirs();
-            Os.chmod(parent1.getPath(), 00755);
-            Os.chmod(parent2.getPath(), 00755);
+            Os.chmod(parent1.getPath(), 755);
+            Os.chmod(parent2.getPath(), 755);
             file.createNewFile();
         } catch (ErrnoException | IOException ignored) {
         }

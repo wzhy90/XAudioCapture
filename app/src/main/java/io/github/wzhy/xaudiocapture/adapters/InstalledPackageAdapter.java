@@ -1,5 +1,6 @@
 package io.github.wzhy.xaudiocapture.adapters;
 
+import static android.content.pm.ApplicationInfo.FLAG_INSTALLED;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
 import static io.github.wzhy.xaudiocapture.Constants.PREF_KEY_SHOW_SELECTED_FIRST;
@@ -14,6 +15,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -84,6 +86,10 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
 
         public boolean isSystemApp() {
             return hasFlag(FLAG_SYSTEM);
+        }
+
+        public boolean isUninstalledApp() {
+            return !hasFlag(FLAG_INSTALLED);
         }
 
         public boolean isSelected() {
@@ -254,7 +260,9 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
 
             icon.setImageDrawable(pkg.getIcon(pm));
             applicationLabel.setText(pkg.getLabel(pm));
-            applicationLabel.setTypeface(null, getTypeFace(pkg.isSystemApp()));
+            applicationLabel.setTypeface(null, getTypeFace(pkg.isSystemApp(), pkg.isUninstalledApp()));
+            if (pkg.isUninstalledApp())
+                applicationLabel.setPaintFlags(applicationLabel.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             packageName.setText(pkg.getPackageName());
             toggle.setOnCheckedChangeListener(null);
             toggle.setChecked(Configuration.isEnabled(pkg.getPackageName()));
@@ -277,9 +285,11 @@ public class InstalledPackageAdapter extends RecyclerView.Adapter<InstalledPacka
             toggle.toggle();
         }
 
-        private static int getTypeFace(boolean system) {
+        private static int getTypeFace(boolean system, boolean uninstall) {
             if (system)
                 return Typeface.BOLD;
+            if (uninstall)
+                return Typeface.ITALIC;
             return Typeface.NORMAL;
         }
     }

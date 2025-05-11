@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import static io.github.wzhy.xaudiocapture.BuildConfig.APPLICATION_ID;
 
 public class Constants {
-    public static final String LOG_TAG = "XAudioCapture";
+    public static final String LOG_TAG = "[XAudioCapture]";
 
     @SuppressLint("SdCardPath")
     public static final String CONFIG_PATH_FORMAT = "/data/user_de/%d/" + APPLICATION_ID + "/config/%s";

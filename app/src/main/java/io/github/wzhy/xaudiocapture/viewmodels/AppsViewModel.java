@@ -24,7 +24,7 @@ public class AppsViewModel extends ViewModel {
 
     public void updatePackageList(final Context context) {
         final PackageManager pm = context.getPackageManager();
-        final List<PackageInfo> packages = pm.getInstalledPackages(0);
+        final List<PackageInfo> packages = pm.getInstalledPackages(PackageManager.MATCH_UNINSTALLED_PACKAGES);
         mInstalledPackages.setValue(packages);
     }
 }

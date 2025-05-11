@@ -26,7 +26,7 @@ public class HookMain implements IXposedHookLoadPackage {
 
     // taken from ApplicationInfo.java
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/content/pm/ApplicationInfo.java
-    private static final int PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE  = 1 << 27;
+    private static final int PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE = 1 << 27;
 
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) {
@@ -36,14 +36,15 @@ public class HookMain implements IXposedHookLoadPackage {
             } else {
                 _hookPreTiramisu(lpparam);
             }
-        } else if (Configuration.isEnabled(lpparam.packageName)) {
+        } else {
             _hookAPP(lpparam);
         }
     }
 
     private void _hookAPP(XC_LoadPackage.LoadPackageParam lpparam) {
+        XposedBridge.log(LOG_TAG + ": " + lpparam.packageName + " Hooked!");
         Class<?> builderClass = XposedHelpers.findClass(
-                "android.media.AudioAttributes$Builder",
+                "android.media.AudioAttributes.Builder",
                 lpparam.classLoader
         );
         XposedBridge.hookAllMethods(
@@ -55,10 +56,12 @@ public class HookMain implements IXposedHookLoadPackage {
                         super.beforeHookedMethod(param);
                         param.args[0] = AudioAttributes.ALLOW_CAPTURE_BY_ALL;
                     }
+
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        XposedBridge.log(lpparam.packageName + " setAllowedCapturePolicy set to: " + param.args[0]);
+                        param.args[0] = AudioAttributes.ALLOW_CAPTURE_BY_ALL;
+                        XposedBridge.log(LOG_TAG + ": " + lpparam.packageName + " setAllowedCapturePolicy to: " + param.args[0]);
                     }
                 }
         );
@@ -68,6 +71,7 @@ public class HookMain implements IXposedHookLoadPackage {
     @SuppressWarnings("unchecked")
     private void _hookPostTiramisu(final XC_LoadPackage.LoadPackageParam lpparam) {
         final String PM_CLASS = "com.android.server.pm.ComputerEngine";
+        XposedBridge.log(LOG_TAG + ": Hook Computer Engine!");
 
         findAndHookMethod(
                 PM_CLASS,
@@ -90,23 +94,23 @@ public class HookMain implements IXposedHookLoadPackage {
 
         try {
             hookAllMethods(
-                lpparam.classLoader.loadClass(PM_CLASS),
-                "getInstalledApplications",
-                new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        try {
-                            List<ApplicationInfo> infos = (List<ApplicationInfo>) param.getResult();
-                            if (infos != null) {
-                                for (ApplicationInfo info : infos) {
-                                    hookPrivateFlags(info, info.packageName);
+                    lpparam.classLoader.loadClass(PM_CLASS),
+                    "getInstalledApplications",
+                    new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) {
+                            try {
+                                List<ApplicationInfo> infos = (List<ApplicationInfo>) param.getResult();
+                                if (infos != null) {
+                                    for (ApplicationInfo info : infos) {
+                                        hookPrivateFlags(info, info.packageName);
+                                    }
                                 }
+                            } catch (Exception e) {
+                                XposedBridge.log(LOG_TAG + ": " + getStackTraceString(e));
                             }
-                        } catch (Exception e) {
-                            XposedBridge.log(LOG_TAG + ": " + getStackTraceString(e));
                         }
                     }
-                }
             );
         } catch (Exception e) {
             XposedBridge.log(LOG_TAG + ": " + getStackTraceString(e));
@@ -116,6 +120,7 @@ public class HookMain implements IXposedHookLoadPackage {
     @SuppressWarnings("unchecked")
     private void _hookPreTiramisu(final XC_LoadPackage.LoadPackageParam lpparam) {
         final String PM_CLASS = "com.android.server.pm.PackageManagerService";
+        XposedBridge.log(LOG_TAG + ": Hook Package Manager Service!");
 
         findAndHookMethod(
                 PM_CLASS,
@@ -128,7 +133,7 @@ public class HookMain implements IXposedHookLoadPackage {
                         try {
                             ApplicationInfo appInfo = (ApplicationInfo) param.getResult();
                             if (appInfo != null)
-                                hookPrivateFlags(appInfo, ((ApplicationInfo) param.getResult()).packageName);
+                                hookPrivateFlags(appInfo, appInfo.packageName);
                         } catch (Exception e) {
                             XposedBridge.log(LOG_TAG + ": " + getStackTraceString(e));
                         }
@@ -157,6 +162,7 @@ public class HookMain implements IXposedHookLoadPackage {
                     }
                 }
         );
+
     }
 
     private void hookPrivateFlags(ApplicationInfo appInfo, String packageName) {
@@ -171,6 +177,7 @@ public class HookMain implements IXposedHookLoadPackage {
                     "privateFlags",
                     privateFlags
             );
+            XposedBridge.log(LOG_TAG + ": new Flags " + packageName);
         }
     }
 }
